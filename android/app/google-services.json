@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "629353432590",
+    "project_id": "blockcypher-6a1a4",
+    "storage_bucket": "blockcypher-6a1a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629353432590:android:8940e617dbd6e1a1d6de5f",
+        "android_client_info": {
+          "package_name": "com.example.block_cypher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629353432590-86kpqv1ho4d47rpec9afge6990m8jakl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAVedLR1QCFOBF0ILAw6GESEPgrNxB9pg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629353432590-86kpqv1ho4d47rpec9afge6990m8jakl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
