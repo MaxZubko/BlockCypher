@@ -1,31 +1,9 @@
-import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_cubit/btm_nav_bar_cubit.dart';
-import 'package:block_cypher/block_cypher/data/datasources/block_remote.dart';
-import 'package:block_cypher/block_cypher/data/models/block.dart';
-import 'package:block_cypher/firebase_auth/bloc/auth_bloc.dart';
-import 'package:block_cypher/firebase_auth/bloc/auth_event.dart';
-import 'package:block_cypher/firebase_auth/bloc/auth_state.dart';
-import 'package:block_cypher/firebase_auth/presentation/singIn/sing_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:block_cypher/block_cypher/bloc/explorer_bloc/cubit/blocks_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ExplorerScreen extends StatefulWidget {
+class ExplorerScreen extends StatelessWidget {
   const ExplorerScreen({Key? key}) : super(key: key);
-
-  @override
-  _ExplorerScreenState createState() => _ExplorerScreenState();
-}
-
-class _ExplorerScreenState extends State<ExplorerScreen> {
-  late Future<List<BlockModel>> futureBlock;
-
-  @override
-  void initState() {
-    final timeNow = DateTime.now().millisecondsSinceEpoch;
-    print(timeNow);
-    super.initState();
-    futureBlock = BlockRemoteDataSource().getBlocks(timeNow);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +74,16 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
         ),
         SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: FutureBuilder<List<BlockModel>>(
-              future: futureBlock,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
+            child: BlocBuilder<BlocksCubit, BlocksState>(
+              builder: (context, state) {
+                if (state is BlockLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is BlockLoadedState) {
+                  final blocksData = state.block;
+
                   return DataTable(
                       columns: const [
                         DataColumn(label: Text('Height')),
@@ -108,16 +92,18 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
                       ],
                       rows: List.generate(5, (index) {
                         return DataRow(cells: [
-                          DataCell(Text('${snapshot.data![index].height}')),
-                          DataCell(Text(snapshot.data![index].hash)),
-                          DataCell(Text('${snapshot.data![index].time}')),
+                          DataCell(Text('${blocksData[index].height}')),
+                          DataCell(Text(blocksData[index].hash)),
+                          DataCell(Text('${blocksData[index].time}')),
                         ]);
                       }));
-                } else {
-                  return const Center(child: CircularProgressIndicator());
                 }
+                if (state is BlockErrorState) {
+                  return Center(child: Text(state.error.toString()));
+                }
+                return Container();
               },
-            ))
+            )),
       ],
     );
   }

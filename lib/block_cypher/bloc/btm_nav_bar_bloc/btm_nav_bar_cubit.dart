@@ -1,4 +1,4 @@
-import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_cubit/btm_nav_bar_state.dart';
+import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_bloc/btm_nav_bar_state.dart';
 import 'package:block_cypher/block_cypher/presentation/pages/address_screen.dart';
 import 'package:block_cypher/block_cypher/presentation/pages/block_list_screen.dart';
 import 'package:block_cypher/block_cypher/presentation/pages/blocks_screen.dart';

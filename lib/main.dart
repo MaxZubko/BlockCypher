@@ -1,4 +1,6 @@
-import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_cubit/btm_nav_bar_cubit.dart';
+import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_bloc/btm_nav_bar_cubit.dart';
+import 'package:block_cypher/block_cypher/bloc/explorer_bloc/cubit/blocks_cubit.dart';
+import 'package:block_cypher/block_cypher/data/repositories/block_repository.dart';
 import 'package:block_cypher/block_cypher/presentation/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +31,9 @@ class MyApp extends StatelessWidget {
                       RepositoryProvider.of<AuthRepository>(context)),
             ),
             BlocProvider<BtmNavBarCubit>(create: (context) => BtmNavBarCubit()),
+            BlocProvider<BlocksCubit>(
+              create: (context) => BlocksCubit(BlockRepository()),
+            )
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -1,11 +1,9 @@
-import 'package:block_cypher/block_cypher/data/models/block.dart';
+import 'package:block_cypher/block_cypher/data/models/block_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class BlockRemoteDataSource {
+class BlockRepository {
   // final http.Client client;
-  // final int timeNow = DateTime.now().microsecondsSinceEpoch * 1000;
-  // print(timeNow);
 
   // BlockRemoteDataSource({required this.client});
 
@@ -19,11 +17,8 @@ class BlockRemoteDataSource {
       return block
           .map<BlockModel>((json) => BlockModel.fromJson(json))
           .toList();
-      // return (block['blocks'] as List)
-      //     .map((block) => BlockModel.fromJson(block))
-      //     .toList();
     } else {
-      throw Exception();
+      throw Exception('Failed to load block');
     }
   }
 }

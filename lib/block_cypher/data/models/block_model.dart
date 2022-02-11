@@ -1,29 +1,29 @@
-// import 'package:block_cypher/block_cypher/domain/entities/block_entity.dart';
+import 'package:equatable/equatable.dart';
 
-// class BlockModel extends BlockEntity {
-//   const BlockModel({
-//     required height,
-//     required hash,
-//     required time,
-//   }) : super(
-//           height: height,
-//           hash: hash,
-//           time: time,
-//         );
+class BlockModel extends Equatable {
+  final int height;
+  final String hash;
+  final int time;
 
-//   factory BlockModel.fromJson(Map<String, dynamic> json) {
-//     return BlockModel(
-//       height: json['height'],
-//       hash: json['hash'],
-//       time: DateTime.parse(json['time'] as String),
-//     );
-//   }
+  const BlockModel(
+      {required this.height, required this.hash, required this.time});
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'height': height,
-//       'hash': hash,
-//       'time': time,
-//     };
-//   }
-// }
+  @override
+  List<Object?> get props => [height, hash, time];
+
+  factory BlockModel.fromJson(Map<String, dynamic> json) {
+    return BlockModel(
+      height: json['height'],
+      hash: json['hash'],
+      time: json['time'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'height': height,
+      'hash': hash,
+      'time': time,
+    };
+  }
+}

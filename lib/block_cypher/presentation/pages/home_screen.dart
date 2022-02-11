@@ -1,5 +1,5 @@
-import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_cubit/btm_nav_bar_cubit.dart';
-import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_cubit/btm_nav_bar_state.dart';
+import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_bloc/btm_nav_bar_cubit.dart';
+import 'package:block_cypher/block_cypher/bloc/btm_nav_bar_bloc/btm_nav_bar_state.dart';
 import 'package:block_cypher/firebase_auth/bloc/auth_bloc.dart';
 import 'package:block_cypher/firebase_auth/bloc/auth_event.dart';
 import 'package:block_cypher/firebase_auth/bloc/auth_state.dart';
