@@ -71,6 +71,7 @@ flutter:
     - assets/images/blockchain.jpg
     - assets/images/bitcoin.svg.png
     - assets/images/logo.png
+    - assets/images/block.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

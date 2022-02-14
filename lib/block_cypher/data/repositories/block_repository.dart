@@ -3,10 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class BlockRepository {
-  // final http.Client client;
-
-  // BlockRemoteDataSource({required this.client});
-
   Future<List<BlockModel>> getBlocks(timeNow) async {
     final response = await http
         .get(Uri.parse('https://blockchain.info/blocks/$timeNow?format=json'));

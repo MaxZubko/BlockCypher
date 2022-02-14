@@ -1,6 +1,9 @@
 import 'package:block_cypher/block_cypher/bloc/explorer_bloc/cubit/blocks_cubit.dart';
+import 'package:block_cypher/block_cypher/presentation/pages/block_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+late String hashB;
 
 class ExplorerScreen extends StatelessWidget {
   const ExplorerScreen({Key? key}) : super(key: key);
@@ -83,7 +86,6 @@ class ExplorerScreen extends StatelessWidget {
                 }
                 if (state is BlockLoadedState) {
                   final blocksData = state.block;
-
                   return DataTable(
                       columns: const [
                         DataColumn(label: Text('Height')),
@@ -92,7 +94,18 @@ class ExplorerScreen extends StatelessWidget {
                       ],
                       rows: List.generate(5, (index) {
                         return DataRow(cells: [
-                          DataCell(Text('${blocksData[index].height}')),
+                          DataCell(TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BlockInfoPage(
+                                              hashBlock: blocksData[index].hash,
+                                              heightBlock:
+                                                  '${blocksData[index].height}',
+                                            )));
+                              },
+                              child: Text('${blocksData[index].height}'))),
                           DataCell(Text(blocksData[index].hash)),
                           DataCell(Text('${blocksData[index].time}')),
                         ]);
