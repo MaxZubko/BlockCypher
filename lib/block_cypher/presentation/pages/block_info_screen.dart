@@ -1,4 +1,6 @@
 import 'package:block_cypher/block_cypher/bloc/block_info_bloc/cubit/blockinfo_cubit.dart';
+import 'package:expandable/expandable.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,19 +45,11 @@ class BlockInfoPage extends StatelessWidget {
                       }
                       if (state is BlockInfoLoadedState) {
                         final blocksInfoData = state.blockInfo;
-                        return Column(
-                          children: [
-                            _blockInfo(blocksInfoData),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'Advanced Details',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                            const SizedBox(height: 10),
-                            _blockDetails(blocksInfoData),
-                          ],
-                        );
+                        return Column(children: [
+                          _blockInfo(blocksInfoData),
+                          const SizedBox(height: 20),
+                          _blockDetails(blocksInfoData),
+                        ]);
                       }
                       if (state is BlockInfoErrorState) {
                         return Center(child: Text(state.error.toString()));
@@ -151,31 +145,48 @@ class BlockInfoPage extends StatelessWidget {
     );
   }
 
-  Table _blockDetails(blocksInfoData) {
-    return Table(
-      border: TableBorder.all(color: Colors.grey.shade400),
-      children: [
-        TableRow(decoration: BoxDecoration(color: Colors.grey[200]), children: [
-          const Padding(
-              padding: EdgeInsets.all(15),
-              child: Text(
-                'Size',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text('${blocksInfoData.size}')),
-        ]),
-        TableRow(decoration: BoxDecoration(color: Colors.grey[200]), children: [
-          const Padding(
-              padding: EdgeInsets.all(15),
-              child:
-                  Text('Nonce', style: TextStyle(fontWeight: FontWeight.bold))),
-          Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text('${blocksInfoData.nonce}')),
-        ]),
-      ],
-    );
+  SizedBox _blockDetails(blocksInfoData) {
+    return SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ExpansionTile(
+            tilePadding: const EdgeInsets.symmetric(horizontal: 87),
+            title: const Text(
+              'Advanced Details',
+            ),
+            children: [
+              Table(
+                border: TableBorder.all(color: Colors.grey.shade400),
+                children: [
+                  TableRow(
+                      decoration: BoxDecoration(color: Colors.grey[200]),
+                      children: [
+                        const Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Text(
+                              'Size',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Text('${blocksInfoData.size}')),
+                      ]),
+                  TableRow(
+                      decoration: BoxDecoration(color: Colors.grey[200]),
+                      children: [
+                        const Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Text('Nonce',
+                                style: TextStyle(fontWeight: FontWeight.bold))),
+                        Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Text('${blocksInfoData.nonce}')),
+                      ]),
+                ],
+              )
+            ],
+          ),
+        ));
   }
 }
